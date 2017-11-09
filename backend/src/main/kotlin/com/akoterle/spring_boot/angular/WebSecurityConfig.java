@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -21,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests().antMatchers("/auth/session").permitAll()
-                .and().authorizeRequests().antMatchers("/api/**").fullyAuthenticated()
+                .and().authorizeRequests().antMatchers("/api/**").permitAll()//fullyAuthenticated()
                 .and().headers().frameOptions().sameOrigin()
                 .and().csrf().disable();
     }
