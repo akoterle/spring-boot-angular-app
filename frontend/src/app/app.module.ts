@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { TreeModule } from 'angular-tree-component';
-
+import { TreeModule } from 'ng2-tree';
+import { AngularSplitModule } from 'angular-split';
 
 // used to create fake backend
-import { MockBackend, MockConnection } from '@angular/http/testing';
+// import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -22,14 +22,13 @@ import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
 
-
-
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     TreeModule,
+    AngularSplitModule,
     routing
   ],
   declarations: [

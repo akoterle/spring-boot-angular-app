@@ -1,8 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Hello {{title}}!
-  </h1>
-  <app-hierarchies></app-hierarchies>
-  <app-hierarchytree></app-hierarchytree>
+<div>
+  <div style="text-align:center">
+    <h1>
+      Hello {{title}}!
+    </h1>
+    <app-hierarchies></app-hierarchies>
+  </div>
+  <split direction="vertical">
+    <split-area [size]="25">
+      <app-hierarchytree></app-hierarchytree>
+    </split-area>
+    <split-area [size]="75">
+      <p>Sed ut perspiciatis unde omnis iste natus erro...</p>
+    </split-area>
+  </split>
 </div>
