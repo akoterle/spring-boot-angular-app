@@ -21,6 +21,7 @@ import { LoginComponent } from './login/index';
 import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
+import { ConfigService } from './config/config.service';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytre
     AlertService,
     AuthenticationService,
 //    HierarchiesService
+    ConfigService
   ],
   bootstrap: [AppComponent]
 })

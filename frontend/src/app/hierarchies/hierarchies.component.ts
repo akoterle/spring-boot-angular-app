@@ -10,9 +10,9 @@ import 'rxjs/add/operator/map';
 })
 export class HierarchiesComponent {
   private hierarchies: Hierarchy[];
-  private loading: boolean = false;
+  private loading: Boolean = false;
   constructor(hierarchiesService: HierarchiesService) {
-    hierarchiesService.getHierarchies().subscribe(data => {
+    hierarchiesService.hierarchies().subscribe(data => {
       this.loading = false;
       this.hierarchies = data;
     });

@@ -23,7 +23,7 @@
     "@angular/router": "^5.0.0",
     "angular-split": "^0.2.6",
     "core-js": "^2.4.1",
-    "ng2-tree": "^2.0.0-rc.1",
+    "ng2-tree": "^2.0.0-alpha.10",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
