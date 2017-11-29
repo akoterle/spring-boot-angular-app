@@ -1,6 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ITemplate } from '../model';
+import { TemplateAPIService } from '../api/service';
 
 @Component({
   selector: 'app-template-list',
@@ -9,6 +10,10 @@ import { ITemplate } from '../model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TemplateListComponent {
+  constructor(private api: TemplateAPIService) {
+    api.getAll('anyApp');
+  }
+
   @Input() appName: string;
   @Input() templates: Observable<ITemplate[]>;
   @Input() loading: Observable<boolean>;

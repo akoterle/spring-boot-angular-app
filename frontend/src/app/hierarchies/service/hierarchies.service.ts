@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import { Hierarchy } from '../hierarchy';
-import { ConfigService } from '../../config/config.service';
+import { AppConfig } from '../../config/component';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HierarchiesService {
-  constructor(private config: ConfigService, private http: Http) {
+  constructor(private config: AppConfig, private http: Http) {
     this.http = http;
     this.config = config;
   }

@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { AppConfigComponent } from './component';
-
-import { environment } from '../../environments/environment';
+import { AppConfig } from './component';
 
 @NgModule({
-  declarations: [AppConfigComponent],
-  exports: [AppConfigComponent],
+  declarations: [],
+  exports: [],
   imports: [],
-  providers: []
+  providers: [AppConfig]
 })
 export class AppConfigModule {}
