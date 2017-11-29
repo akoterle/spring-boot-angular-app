@@ -23,6 +23,7 @@ import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
 import { AppConfigModule } from './config/module';
+import { FileUploadComponent } from './notifications/templates/upload/component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,7 @@ import { AppConfigModule } from './config/module';
     LoginComponent,
     HierarchiesComponent,
     HierarchyTreeComponent,
-
+    FileUploadComponent
   ],
   providers: [
     AuthGuard,
