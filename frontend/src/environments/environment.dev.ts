@@ -3,6 +3,9 @@ export const environment = {
   api: {
     hierarchies: {
       list: '/api/list'
+    },
+    notifications: {
+      templates: '/api/templates'
     }
   }
 };

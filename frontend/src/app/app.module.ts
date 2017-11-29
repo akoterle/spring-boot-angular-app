@@ -17,7 +17,7 @@ import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService } from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
-import { TemplatesModule } from './templates/module';
+import { TemplatesModule } from './notifications/templates/module';
 
 import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
