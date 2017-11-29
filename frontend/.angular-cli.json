@@ -10,8 +10,13 @@
       "assets": [
         "assets",
         "favicon.ico",
-        { "glob": "**/*", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
-        { "glob": "save.png", "input": "../node_modules/ckeditor/plugins/icons/", "output": "./ckeditor/" }
+        { "glob": "save.png", "input": "../node_modules/ckeditor/plugins/save/icons/", "output": "./ckeditor/icons/" },
+        { "glob": "styles.js", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
+        { "glob": "contents.css", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
+        { "glob": "config.js", "input": "./3rdParties/ckeditor/", "output": "./ckeditor/" },
+        { "glob": "**/*", "input": "../node_modules/ckeditor/lang/", "output": "./ckeditor/lang/" },
+        { "glob": "**/*", "input": "../node_modules/ckeditor/plugins/", "output": "./ckeditor/plugins/" },
+        { "glob": "**/*", "input": "../node_modules/ckeditor/skins/", "output": "./ckeditor/skins/" }
       ],
       "index": "index.html",
       "main": "main.ts",

@@ -1,0 +1,18 @@
+<h2>Iniziativa {{ appName }}!</h2>
+
+<zoo-spinner *ngIf="loading | async">
+</zoo-spinner>
+
+<section class="header">
+  <div class="header-cell">Nome</div>
+  <div class="header-cell">Descrizione</div>
+  <div class="header-cell">Allegati</div>
+</section>
+<app-template
+  *ngFor="let template of templates | async; trackBy:getKey"
+  [appName]=appName
+  [key]=getKey(null,animal)>
+</app-template>
+
+<zoo-error-well *ngIf="error | async">
+</zoo-error-well>

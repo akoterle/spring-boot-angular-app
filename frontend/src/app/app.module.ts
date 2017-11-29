@@ -17,13 +17,12 @@ import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService } from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
-import { TemplatesComponent } from './templates/index';
+import { TemplatesModule } from './templates/module';
 
 import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
 import { ConfigService } from './config/config.service';
-import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   imports: [
@@ -33,7 +32,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
     TreeModule,
     AngularSplitModule,
     routing,
-    CKEditorModule
+    TemplatesModule
   ],
   declarations: [
     AppComponent,
@@ -42,7 +41,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
     LoginComponent,
     HierarchiesComponent,
     HierarchyTreeComponent,
-    TemplatesComponent
 
   ],
   providers: [
