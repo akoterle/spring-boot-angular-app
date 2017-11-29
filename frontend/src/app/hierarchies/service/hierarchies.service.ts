@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import { Hierarchy } from '../hierarchy';
-import { AppConfig } from '../../config/component';
+import { AppConfig } from '../../config/service';
 import 'rxjs/add/operator/map';
 
 @Injectable()

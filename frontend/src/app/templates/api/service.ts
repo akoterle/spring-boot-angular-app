@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
 import { ITemplate } from '../model';
-import { AppConfig } from '../../config/component';
+import { AppConfig } from '../../config/service';
 
 @Injectable()
 export class TemplateAPIService {

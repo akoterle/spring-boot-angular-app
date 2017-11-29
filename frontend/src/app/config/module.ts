@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AppConfig } from './component';
+import { AppConfig } from './service';
 
 @NgModule({
   declarations: [],

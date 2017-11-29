@@ -22,7 +22,7 @@ import { TemplatesModule } from './templates/module';
 import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
-import { AppConfig } from './config/component';
+import { AppConfigModule } from './config/module';
 
 @NgModule({
   imports: [
@@ -32,7 +32,8 @@ import { AppConfig } from './config/component';
     TreeModule,
     AngularSplitModule,
     routing,
-    TemplatesModule
+    TemplatesModule,
+    AppConfigModule
   ],
   declarations: [
     AppComponent,
@@ -48,7 +49,6 @@ import { AppConfig } from './config/component';
     AlertService,
     AuthenticationService,
 //    HierarchiesService
-    AppConfig
   ],
   bootstrap: [AppComponent]
 })
