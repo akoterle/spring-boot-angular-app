@@ -13,12 +13,15 @@ export class TemplateEditorComponent implements OnInit {
   onFocus(event) {}
   onBlur(event) {}
   onChange(event) {}
-  onReady(event) {}
+  onReady(event) {
+    let x = event;
+  }
   save(event) {
     let a = event;
   }
 
   ngOnInit() {
+
 
   }
 }
