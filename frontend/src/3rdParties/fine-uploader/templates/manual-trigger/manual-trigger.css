@@ -1,0 +1,24 @@
+.buttons {
+    text-align: start;
+}
+
+#trigger-upload, .qq-upload-button {
+  color: white;
+  background-color: #00abc7;
+  font-size: 14px;
+  padding: 7px 20px;
+  background-image: none;
+  width: auto
+}
+
+#fine-uploader-manual-trigger .qq-upload-button {
+  margin-right: 15px;
+}
+
+#fine-uploader-manual-trigger .buttons {
+  width: 36%;
+}
+
+#fine-uploader-manual-trigger .qq-uploader .qq-total-progress-bar-container {
+  width: 60%;
+}

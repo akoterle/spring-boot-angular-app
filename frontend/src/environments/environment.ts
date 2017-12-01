@@ -10,7 +10,8 @@ export const environment = {
       list: '/api/list'
     },
     notifications: {
-      templates: '/api/templates'
+      templates: '/api/templates',
+      uploadFiles: '/api/upload'
     }
   }
 };

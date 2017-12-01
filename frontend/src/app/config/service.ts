@@ -11,4 +11,5 @@ export class AppConfig {
 
   isProduction = () => this.environment.production;
   templatesUrl = () => this.environment.api.notifications.templates;
+  uploadEndpoint = () => this.environment.api.notifications.uploadFiles;
 }

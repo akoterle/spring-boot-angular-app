@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-template-editor',
-  moduleId: module.id.toString(),
   templateUrl: './component.html'
 })
 export class TemplateEditorComponent implements OnInit {
@@ -20,5 +19,6 @@ export class TemplateEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 }

@@ -26,9 +26,11 @@ CKEDITOR.editorConfig = function(config) {
     { name: 'about' }
   ];
 
+  config.extraPlugins = 'placeholder';
+
   // Remove some buttons provided by the standard plugins, which are
   // not needed in the Standard(s) toolbar.
-  config.removeButtons = 'Underline,Subscript,Superscript';
+  config.removeButtons = 'CreatePlaceholder,Maximize,Anchor,Underline,Subscript,Superscript,About,SpecialChar,Table';
 
   // Set the most common block elements.
   config.format_tags = 'p;h1;h2;h3;pre';
@@ -37,8 +39,5 @@ CKEDITOR.editorConfig = function(config) {
   config.removeDialogTabs = 'image:advanced;image:Link;link:advanced';
   config.filebrowserImageUploadUrl = '/uploader/upload.php?type=Images';
 
-//   config.filebrowserImageBrowseUrl = '/browser/browse.php?type=Images'; 
-//   config.filebrowserBrowseUrl = '/browser/browse.php';
-//   config.filebrowserUploadUrl = '/uploader/upload.php';
 
 };

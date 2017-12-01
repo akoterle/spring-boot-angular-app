@@ -9,10 +9,7 @@ import { AppConfig } from '../../../config/service';
 
 @Injectable()
 export class TemplateAPIService {
-  templatesUrl: string;
-  constructor(private http: Http, private appConfig: AppConfig) {
-    this.templatesUrl = appConfig.templatesUrl();
-  }
-  getAll = (appType: string): Observable<ITemplate[]> => this.http.get(this.templatesUrl).map(resp => resp.json());
+  constructor(private http: Http, private appConfig: AppConfig) {  }
+  getAll = (appType: string): Observable<ITemplate[]> => this.http.get(this.appConfig.templatesUrl()).map(resp => resp.json());
   // .map(records => records.map(fromServer));
 }

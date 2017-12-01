@@ -1,0 +1,16 @@
+<div>
+    <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event)" (ready)="onReady($event)" (focus)="onFocus($event)"
+        (blur)="onBlur($event)" debounce="500">
+        <ckbutton [name]="'saveButton'" [command]="'saveCmd'" (click)="save($event)" [icon]="'icons/save.png'" [label]="'Save Document'"
+            [toolbar]="'clipboard,1'">
+        </ckbutton>
+    </ckeditor>
+
+    <app-fine-upload-manual-trigger-template>
+    </app-fine-upload-manual-trigger-template>
+    <div id="fine-uploader-manual-trigger">
+    </div>
+    <button type="button" id="trigger-upload" class="upload-trigger qq-upload-button" (click)="sendFiles($event)">
+        Upload
+    </button>
+</div>
