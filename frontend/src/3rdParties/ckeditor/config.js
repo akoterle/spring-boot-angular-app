@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function(config) {
 
   config.extraPlugins = 'placeholder';
 
-  config.extraPlugins = 'uploadimage,image2,placeholder';
+  config.extraPlugins = 'placeholder';
   // config.height = 300;
 
   // Upload images to a CKFinder connector (note that the response type is set to JSON).
@@ -60,7 +60,7 @@ CKEDITOR.editorConfig = function(config) {
 
   // Remove some buttons provided by the standard plugins, which are
   // not needed in the Standard(s) toolbar.
-  config.removeButtons = 'CreatePlaceholder,Maximize,Anchor,Underline,Subscript,Superscript,About,SpecialChar,Table';
+  config.removeButtons = 'Image,CreatePlaceholder,Maximize,Anchor,Underline,Subscript,Superscript,About,SpecialChar,Table';
 
   // Set the most common block elements.
   config.format_tags = 'p;h1;h2;h3;pre';

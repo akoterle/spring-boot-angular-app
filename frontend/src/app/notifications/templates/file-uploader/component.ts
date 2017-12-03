@@ -16,8 +16,7 @@ export class FileUploadComponent implements OnInit {
   uploader: FineUploader;
   uploadImageInfo: any;
 
-  @ViewChild('uploadForm') uploadForm: ElementRef;
-
+  @ViewChild('uploadImageForm') uploadImageForm: ElementRef;
   @ViewChild('browseImage') browseImage: ElementRef;
 
   constructor(private appConfig: AppConfig, private http: Http) {
@@ -43,41 +42,21 @@ export class FileUploadComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    //const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     const target: HTMLInputElement = <HTMLInputElement>event.target;
     const files: FileList = target.files;
-
     const formData: FormData = new FormData();
 
-    //const ff = Array.from(files);
-    const fileAppender = f => () => formData.append('file', f);
-    Array.from(files).map(fileAppender); // f => formData.append('file', f));
-
-    // for (let i = 0; i < files.length; i++) {
-    //   formData.append('file', files[i]);
-    // }
+    Array.from(files).map(f => formData.append('file', f));
 
     target.form.reset();
-    // POST
     this.http.post('/api/upload/image', formData).subscribe(data => console.log(data));
 
-    var oEditor = CkEditorGlobalObject.instances.editor1;
-    var html = '<img src="http://icons.iconarchive.com/icons/tinylab/android-lollipop-apps/128/7-Minutes-icon.png" alt="user image">';
+    const ckEditorInstance = CkEditorGlobalObject.instances.editor1;
+    const imageTag = '<img src="http://icons.iconarchive.com/icons/tinylab/android-lollipop-apps/128/7-Minutes-icon.png" alt="user image">';
 
-    var newElement = CkEditorGlobalObject.dom.element.createFromHtml(html, oEditor.document);
-    oEditor.insertElement(newElement);
+    const imageElement = CkEditorGlobalObject.dom.element.createFromHtml(imageTag, ckEditorInstance.document);
+    ckEditorInstance.insertElement(imageElement);
   }
-
-  sendFiles = event => {
-    this.browseImage.nativeElement.click();
-    // document.getElementById('clickableLable').click();
-    // event.preventDefault();
-    // const form = this.uploadForm.nativeElement;
-    //   this.http.post('/api/upload/image', form.serialize);
-
-    // this.uploader.setParams({ templateHtml: this.ckeditorContent });
-    // this.uploader.uploadStoredFiles();
-  };
 
   onDialogDefinition = ev => {
     const dialogName = ev.data.name;
