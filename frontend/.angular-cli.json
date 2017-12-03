@@ -10,7 +10,6 @@
       "assets": [
         "assets",
         "favicon.ico",
-        { "glob": "save.png", "input": "../node_modules/ckeditor/plugins/save/icons/", "output": "./ckeditor/icons/" },
         { "glob": "styles.js", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
         { "glob": "contents.css", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
         { "glob": "config.js", "input": "./3rdParties/ckeditor/", "output": "./ckeditor/" },

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FineUploader, UIOptions } from 'fine-uploader';
 import { AppConfig } from '../../../config/service';
-import { BaseRequestOptions } from '@angular/http';
+import { BaseRequestOptions, Http } from '@angular/http';
 
 const CkEditorGlobalObject = window['CKEDITOR'];
 
@@ -16,9 +16,12 @@ export class FileUploadComponent implements OnInit {
   uploader: FineUploader;
   uploadImageInfo: any;
 
-  constructor(private appConfig: AppConfig) {
+  @ViewChild('uploadForm') uploadForm: ElementRef;
+
+  @ViewChild('browseImage') browseImage: ElementRef;
+
+  constructor(private appConfig: AppConfig, private http: Http) {
     this.ckeditorContent = `<p>Html template here</p>`;
-    //CkEditorGlobalObject.on('dialogDefinition', this.onDialogDefinition);
     CkEditorGlobalObject.on('instanceReady', function(ev) {
       const editor = ev.editor;
       editor.on('dialogShow', function(ev) {
@@ -29,17 +32,51 @@ export class FileUploadComponent implements OnInit {
   }
   onFocus(event) {}
   onBlur(event) {}
-  onChange(event) {}
+  onChange(event) {
+    const changed = event;
+  }
   onReady(event) {
     let x = event;
   }
-  save(event) {
-    let a = event;
+  onInsertImage(event) {
+    this.browseImage.nativeElement.click();
+  }
+
+  onFileSelected(event) {
+    //const eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    const target: HTMLInputElement = <HTMLInputElement>event.target;
+    const files: FileList = target.files;
+
+    const formData: FormData = new FormData();
+
+    //const ff = Array.from(files);
+    const fileAppender = f => () => formData.append('file', f);
+    Array.from(files).map(fileAppender); // f => formData.append('file', f));
+
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append('file', files[i]);
+    // }
+
+    target.form.reset();
+    // POST
+    this.http.post('/api/upload/image', formData).subscribe(data => console.log(data));
+
+    var oEditor = CkEditorGlobalObject.instances.editor1;
+    var html = '<img src="http://icons.iconarchive.com/icons/tinylab/android-lollipop-apps/128/7-Minutes-icon.png" alt="user image">';
+
+    var newElement = CkEditorGlobalObject.dom.element.createFromHtml(html, oEditor.document);
+    oEditor.insertElement(newElement);
   }
 
   sendFiles = event => {
-    this.uploader.setParams({ templateHtml: this.ckeditorContent });
-    this.uploader.uploadStoredFiles();
+    this.browseImage.nativeElement.click();
+    // document.getElementById('clickableLable').click();
+    // event.preventDefault();
+    // const form = this.uploadForm.nativeElement;
+    //   this.http.post('/api/upload/image', form.serialize);
+
+    // this.uploader.setParams({ templateHtml: this.ckeditorContent });
+    // this.uploader.uploadStoredFiles();
   };
 
   onDialogDefinition = ev => {
