@@ -39,6 +39,7 @@ export class TemplateEditComponent implements OnInit {
     event.preventDefault();
     const template: ITemplate = {
       ...this.template,
+      initiativeId: 1,
       name: 'Nuovo Template',
       lang: 'en',
       html: this.ckeditorContent
@@ -49,6 +50,7 @@ export class TemplateEditComponent implements OnInit {
   onFileSelected(event) {
     const target: HTMLInputElement = <HTMLInputElement>event.target;
     this.addImages(target.files);
+    target.form.reset();
   }
 
   onFocus(event) {}
@@ -58,52 +60,24 @@ export class TemplateEditComponent implements OnInit {
     this.editorInstance = event.editor;
   }
 
-  saveTemplate = () => {
-    const template: ITemplate = {
-      ...this.template,
-      name: 'Nuovo Template',
-      lang: 'en',
-      html: this.ckeditorContent
-    };
-    return this.api.save(template);
-  };
-
   updateTemplate = (template: ITemplate) => {
-    /*const template: ITemplate = {
-      ...this.template,
-      name: 'Nuovo Template',
-      lang: 'en',
-      html: this.ckeditorContent
-    };
-    */
-    return this.api.update(template);
+    return undefined === template.id ? this.api.save(template) : this.api.update(template);
   };
 
   addImages = (imageFiles: FileList) => {
-
     const template: ITemplate = {
       ...this.template,
+      initiativeId: 1,
       name: 'Nuovo Template',
       lang: 'en',
       html: this.ckeditorContent,
       images: imageFiles
     };
-    this.updateTemplate(template);
+    const result: Observable<any> = this.updateTemplate(template);
 
-    const formData: FormData = new FormData();
-
-    Array.from(target.files).map(f => formData.append('images', f));
-    target.form.reset();
-
-    const blobString = new Blob([this.ckeditorContent], { type: 'text/plain' });
-    formData.append('name', 'Nuovo Template 3');
-    formData.append('template', blobString);
-    formData.append('initiativeId', '1');
-    formData.append('language', 'en');
-
-    const result: Observable<any> = this.http.post(this.templatesUrl, formData, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer 7d43e0ba-b40b-428f-9a4f-aeaec92b053c')
-    });
+    // const result: Observable<any> = this.http.post(this.templatesUrl, formData, {
+    //   headers: new HttpHeaders().set('Authorization', 'Bearer 7d43e0ba-b40b-428f-9a4f-aeaec92b053c')
+    // });
 
     result.subscribe(data => {
       console.log(data);
@@ -112,6 +86,5 @@ export class TemplateEditComponent implements OnInit {
         headers: new HttpHeaders().set('Authorization', 'Bearer 7d43e0ba-b40b-428f-9a4f-aeaec92b053c')
       }) as Observable<any>).subscribe(render => (this.ckeditorContent = render.html));
     });
-    
   };
 }

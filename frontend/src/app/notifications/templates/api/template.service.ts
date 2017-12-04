@@ -24,11 +24,8 @@ export class TemplateService {
     templateData.append('name', template.name);
     templateData.append('template', new Blob([template.html], { type: 'text/plain' }));
     templateData.append('lang', template.lang);
+    Array.from(template.images).map(img => templateData.append('images', img));
     return this.http.post(this.appConfig.templatesUrl(), templateData);
-  }
-
-  addImages = (template: ITemplate, imageFiles: FileList) => {
-
   }
 
 }
