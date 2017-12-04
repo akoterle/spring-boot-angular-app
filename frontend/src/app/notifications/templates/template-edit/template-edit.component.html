@@ -1,0 +1,16 @@
+<div>
+  <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event)" (ready)="onReady($event)" (focus)="onFocus($event)"
+    (blur)="onBlur($event)" debounce="500">
+    <ckbutton [name]="'insertImageButton'" [command]="'insertImage'" (click)="onImageButtonClick($event)" [icon]="'/ckeditor/plugins/image2/icons/image.png?t=H8DC'"
+      [label]="'Insert Image'" [toolbar]="'forms,1'">
+    </ckbutton>
+  </ckeditor>
+  <form #uploadImageForm method='POST' enctype='multipart/form-data'>
+    <label #browseImage for="imageFileInput" style="display: none">
+    </label>
+    <input type="file" name="image" id="imageFileInput" style="display: none" (change)="onFileSelected($event)" />
+  </form>
+  <div>
+      <button (click)=onSaveAll()>Salva</button>
+  </div>  
+</div>

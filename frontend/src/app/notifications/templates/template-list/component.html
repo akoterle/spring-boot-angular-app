@@ -3,12 +3,17 @@
 <!-- <zoo-spinner *ngIf="loading | async">
 </zoo-spinner> -->
 
-<section class="header">
+<!-- <section class="header">
   <div class="header-cell">Nome</div>
   <div class="header-cell">Descrizione</div>
   <div class="header-cell">Allegati</div>
-</section>
-<app-template *ngFor="let template of templates | async; trackBy:getKey" [appName]=appName [key]=getKey(null,template) ></app-template>
+</section> -->
+<ul class="templates">
+  <li *ngFor="let template of templates">
+      <span class="badge">{{template.lang}}</span> {{template.name}}
+    </li>
+</ul>
+<!-- <app-template *ngFor="let template of templates | async; trackBy:getKey" [appName]=appName [key]=getKey(null,template) ></app-template> -->
 
 <!-- <zoo-error-well *ngIf="error | async">
 </zoo-error-well> -->

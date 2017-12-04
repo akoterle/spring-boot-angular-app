@@ -23,6 +23,9 @@ import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
 import { AppConfigModule } from './config/module';
+// import { TemplateEditComponent } from './notifications/templates/template-edit/template-edit.component';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -33,7 +36,8 @@ import { AppConfigModule } from './config/module';
     AngularSplitModule,
     routing,
     TemplatesModule,
-    AppConfigModule
+    AppConfigModule,
+    FlexLayoutModule
   ],
   declarations: [
     AppComponent,
@@ -41,7 +45,8 @@ import { AppConfigModule } from './config/module';
     HomeComponent,
     LoginComponent,
     HierarchiesComponent,
-    HierarchyTreeComponent
+    HierarchyTreeComponent,
+    // TemplateEditComponent
   ],
   providers: [
     AuthGuard,

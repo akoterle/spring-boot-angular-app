@@ -27,10 +27,10 @@ CKEDITOR.editorConfig = function(config) {
     { name: 'about' }
   ];
 
-  config.extraPlugins = 'placeholder';
+  config.extraPlugins = 'image2,placeholder';
 
-  config.extraPlugins = 'placeholder';
-  // config.height = 300;
+  config.allowedContent = true;
+  config.height = 280;
 
   // Upload images to a CKFinder connector (note that the response type is set to JSON).
   // config.uploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json';
@@ -66,6 +66,6 @@ CKEDITOR.editorConfig = function(config) {
   config.format_tags = 'p;h1;h2;h3;pre';
 
   // Simplify the dialog windows.
-  config.removeDialogTabs = 'image:advanced;image:Link;link:advanced';
+  config.removeDialogTabs = 'image:advanced;image:upload;image:Link;link:advanced';
   config.filebrowserImageUploadUrl = '/uploader/upload.php?type=Images';
 };

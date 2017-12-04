@@ -21,22 +21,11 @@ export class FileUploadComponent implements OnInit {
 
   constructor(private appConfig: AppConfig, private http: Http) {
     this.ckeditorContent = `<p>Html template here</p>`;
-    CkEditorGlobalObject.on('instanceReady', function(ev) {
-      const editor = ev.editor;
-      editor.on('dialogShow', function(ev) {
-        let x = ev.editor;
-        let y = ev.data;
-      });
-    });
   }
   onFocus(event) {}
   onBlur(event) {}
-  onChange(event) {
-    const changed = event;
-  }
-  onReady(event) {
-    let x = event;
-  }
+  onChange(event) {}
+  onReady(event) {}
   onInsertImage(event) {
     this.browseImage.nativeElement.click();
   }
@@ -58,18 +47,6 @@ export class FileUploadComponent implements OnInit {
     ckEditorInstance.insertElement(imageElement);
   }
 
-  onDialogDefinition = ev => {
-    const dialogName = ev.data.name;
-    const dialogDefinition = ev.data.definition;
-
-    if (dialogName === 'image2') {
-      const infoTab = dialogDefinition.getContents('Upload');
-      const uploadButton = infoTab.get('uploadButton');
-      this.uploadImageInfo = infoTab;
-      const action = this.uploadImageInfo.elements[0].action;
-      this.uploadImageInfo.elements[0].action = action + '&id=1';
-    }
-  };
 
   ngOnInit() {
     this.uploader = new FineUploader({

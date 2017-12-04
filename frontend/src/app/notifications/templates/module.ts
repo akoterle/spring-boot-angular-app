@@ -10,10 +10,11 @@ import { TemplateComponent } from './template/component';
 import { TemplateAPIService } from './api/service';
 import { FineUploadManualTriggerTemplateComponent } from '../../../3rdParties/fine-uploader/templates/manual-trigger/manual-trigger';
 import { FileUploadComponent } from './file-uploader/component';
+import { TemplateEditComponent } from './template-edit/template-edit.component';
 
 @NgModule({
-  declarations: [TemplatesComponent, TemplateComponent, TemplateListComponent, FineUploadManualTriggerTemplateComponent, FileUploadComponent],
-  exports: [TemplatesComponent, FineUploadManualTriggerTemplateComponent, FileUploadComponent],
+  declarations: [TemplatesComponent, TemplateEditComponent, TemplateComponent, TemplateListComponent, FineUploadManualTriggerTemplateComponent, FileUploadComponent],
+  exports: [TemplatesComponent, TemplateEditComponent, FineUploadManualTriggerTemplateComponent, FileUploadComponent],
   imports: [FormsModule, CKEditorModule, AppConfigModule, TemplateEditorModule, CommonModule],
   providers: [TemplateAPIService]
 })
