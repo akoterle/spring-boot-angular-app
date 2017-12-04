@@ -3,4 +3,5 @@ export interface ITemplate {
   name: string;
   html: string;
   lang: string;
+  images: FileList;
 }

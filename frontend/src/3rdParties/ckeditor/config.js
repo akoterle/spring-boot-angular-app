@@ -30,7 +30,7 @@ CKEDITOR.editorConfig = function(config) {
   config.extraPlugins = 'image2,placeholder';
 
   config.allowedContent = true;
-  config.height = 280;
+  // config.height = 280;
 
   // Upload images to a CKFinder connector (note that the response type is set to JSON).
   // config.uploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json';
