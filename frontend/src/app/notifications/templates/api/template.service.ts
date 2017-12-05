@@ -45,4 +45,10 @@ export class TemplateService {
   render = (template: ITemplate) => {
     return this.http.get(this.appConfig.templatesUrl() + `/${template.id}/render`, { headers: this.headers });
   };
+
+  test = (template: ITemplate, sendTo: string) => {
+    const templateData: FormData = new FormData();
+    templateData.append('email', sendTo);
+    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/sendto`, templateData, { headers: this.headers });
+  };
 }

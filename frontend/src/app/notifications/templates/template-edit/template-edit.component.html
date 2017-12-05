@@ -1,20 +1,12 @@
 <div class="container">
-  <div fxLayout="row" fxLayoutAlign="left left" class="content">
-    <div fxFlex="30%" class="template-data">
-
-      <div fxLayout="column" fxLayoutAlign="center center" class="template-form" style="padding: 10px">
-        <div fxFlex="30%" class="template-input-field">
-          <label for="name">Nome template</label>
-          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="template.name" />
-        </div>
-        <div fxFlex="30%" class="template-input-field">
-          <label for="lang">Lingua template</label>
-          <input type="text" class="form-control" id="lang" name="lang" [(ngModel)]="template.lang" />
-        </div>
-      </div>
-
+  <div class="row">
+    <div class="col-4" style="padding: 10px;">
+      <label for="name">Nome template</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="template.name" />
+      <label for="lang">Lingua template</label>
+      <input type="text" class="form-control" id="lang" name="lang" [(ngModel)]="template.lang" />
     </div>
-    <div fxFlex="30%" class="template-editor">
+    <div class="col-8" style="padding: 10px">
       <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event)" (ready)="onReady($event)" (focus)="onFocus($event)"
         (blur)="onBlur($event)" debounce="500">
         <ckbutton [name]="'insertImageButton'" [command]="'insertImage'" (click)="onImageButtonClick($event)" [icon]="'/ckeditor/plugins/image2/icons/image.png?t=H8DC'"
@@ -37,8 +29,21 @@
       </form>
     </div>
   </div>
-  <div style="text-align: right; padding-top: 10px">
-    <button type="button" class="btn btn-primary" (click)=onSave($event)>Salva Template</button>
-    <button type="button" class="btn btn-primary" (click)=onCancel($event)>Annulla</button>
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-8 ">
+        <div class="row justify-content-start">
+          <button [disabled]="!isTemplateValid()" type="button" class="btn btn-primary" (click)=onTest($event)>Prova Template</button>
+          <input type="text" style="width: 80%;" class="form-control" id="test-recipient" name="recipient" [(ngModel)]="testRecipient"
+          />
+        </div>
+      </div>
+      <div class="col-4">
+        <div style="text-align: right">
+          <button type="button" class="btn btn-primary" (click)=onSave($event)>Salva Template</button>
+          <button type="button" class="btn btn-primary" (click)=onCancel($event)>Annulla</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

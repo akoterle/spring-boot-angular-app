@@ -15,6 +15,7 @@ const CKEDITOR = window['CKEDITOR'];
 })
 export class TemplateEditComponent implements OnInit {
   ckeditorContent: string;
+  testRecipient: string;
   uploadImageEndpoint: string;
   templatesUrl: string;
   editorInstance: any;
@@ -40,6 +41,7 @@ export class TemplateEditComponent implements OnInit {
       images: undefined,
       attachments: undefined
     };
+    this.testRecipient = 'test@email.me';
   }
 
   ngOnInit() {}
@@ -58,6 +60,14 @@ export class TemplateEditComponent implements OnInit {
 
   onCancel(event) {
     event.preventDefault();
+  }
+
+  isTemplateValid() {
+    return this.template.id !== undefined;
+  }
+  onTest(event) {
+    event.preventDefault();
+    this.api.test({...this.template}, this.testRecipient).subscribe(res => console.log(res));
   }
 
   onImageSelected(event) {
