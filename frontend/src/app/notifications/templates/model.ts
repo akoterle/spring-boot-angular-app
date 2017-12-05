@@ -5,4 +5,5 @@ export interface ITemplate {
   html: string;
   lang: string;
   images: FileList;
+  attachments: FileList;
 }

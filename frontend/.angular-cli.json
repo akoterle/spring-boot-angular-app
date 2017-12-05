@@ -10,6 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
+        { "glob": "attachment.png", "input": "./", "output": "./icons/" },
         { "glob": "styles.js", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
         { "glob": "contents.css", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
         { "glob": "config.js", "input": "./3rdParties/ckeditor/", "output": "./ckeditor/" },
@@ -25,7 +26,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": ["styles.css", "../node_modules/ng2-tree/styles.css"],
+      "styles": ["styles.css", "../node_modules/bootstrap/dist/css/bootstrap.min.css", "../node_modules/ng2-tree/styles.css"],
       "scripts": ["../node_modules/ckeditor/ckeditor.js", "../node_modules/fine-uploader/fine-uploader/fine-uploader.min.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {

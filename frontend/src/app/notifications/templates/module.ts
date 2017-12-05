@@ -12,12 +12,11 @@ import { TemplateService } from './api/template.service';
 import { FineUploadManualTriggerTemplateComponent } from '../../../3rdParties/fine-uploader/templates/manual-trigger/manual-trigger';
 import { FileUploadComponent } from './file-uploader/component';
 import { TemplateEditComponent } from './template-edit/template-edit.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [TemplatesComponent, TemplateEditComponent, TemplateComponent, TemplateListComponent, FileUploadComponent],
   exports: [TemplatesComponent, TemplateEditComponent, FileUploadComponent],
-  imports: [FormsModule, CKEditorModule, FlexLayoutModule, AppConfigModule, TemplateEditorModule, CommonModule],
+  imports: [FormsModule, CKEditorModule, AppConfigModule, TemplateEditorModule, CommonModule],
   providers: [TemplateService, TemplateAPIService]
 })
 export class TemplatesModule {}

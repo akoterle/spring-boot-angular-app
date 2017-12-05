@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
 import { TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
 import { ITemplate } from '../model';
-
 // const CKEDITOR = window['CKEDITOR'];
 
 @Component({
@@ -21,13 +21,33 @@ export class TemplateEditComponent implements OnInit {
 
   @ViewChild('uploadImageForm') uploadImageForm: ElementRef;
   @ViewChild('browseImageFile') browseImageFile: ElementRef;
+  @ViewChild('uploadAttachmentForm') uploadAttachmentForm: ElementRef;
+  @ViewChild('browseAttachment') browseAttachment: ElementRef;
 
-  constructor(private api: TemplateService) {}
+  @Input()
+  set templateId(id: number) {
+    this.template.id = id;
+  }
+
+  constructor(private api: TemplateService) {
+    this.template = {
+      id: undefined,
+      initiativeId: 1,
+      name: 'Nuovo Template',
+      lang: 'en',
+      html: this.ckeditorContent,
+      images: undefined,
+      attachments: undefined
+    };
+  }
 
   ngOnInit() {}
 
   onImageButtonClick(event) {
     this.browseImageFile.nativeElement.click();
+  }
+  onAttachmentButtonClick(event) {
+    this.browseAttachment.nativeElement.click();
   }
 
   onSave(event) {
@@ -35,9 +55,18 @@ export class TemplateEditComponent implements OnInit {
     this.updateTemplate();
   }
 
-  onFileSelected(event) {
+  onCancel(event) {
+    event.preventDefault();
+  }
+
+  onImageSelected(event) {
     const target: HTMLInputElement = <HTMLInputElement>event.target;
     this.addImages(target.files);
+    target.form.reset();
+  }
+  onAttachmentSelected(event) {
+    const target: HTMLInputElement = <HTMLInputElement>event.target;
+    this.addAttachments(target.files);
     target.form.reset();
   }
 
@@ -49,21 +78,17 @@ export class TemplateEditComponent implements OnInit {
   }
 
   updateTemplate = () => {
-    if (undefined === this.template.id) {
-      return this.api.save({
-        ...this.template,
-        initiativeId: 1,
-        name: 'Nuovo Template',
-        lang: 'en',
-        html: this.ckeditorContent
-      });
-    }
-
-    this.api.update({
-      ...this.template,
-      name: 'Nuovo Template',
-      html: this.ckeditorContent
-    });
+    const update =
+      undefined === this.template.id
+        ? this.api.save({
+            ...this.template,
+            html: this.ckeditorContent
+          })
+        : this.api.update({
+            ...this.template,
+            html: this.ckeditorContent
+          });
+    update.subscribe(resp => console.log(resp));
   };
 
   addImages = (imageFiles: FileList) => {
@@ -77,7 +102,7 @@ export class TemplateEditComponent implements OnInit {
           html: this.ckeditorContent,
           images: imageFiles
         })
-        .flatMap(resp => {
+        .mergeMap((resp: any) => {
           this.template.id = resp.templateId;
           return this.api.render({ ...this.template });
         })
@@ -90,6 +115,28 @@ export class TemplateEditComponent implements OnInit {
         })
         .flatMap(resp => this.api.render({ ...this.template }))
         .subscribe((resp: any) => (this.ckeditorContent = resp.html));
+    }
+  };
+
+  addAttachments = (attachments: FileList) => {
+    if (undefined === this.template.id) {
+      this.api
+        .save({
+          ...this.template,
+          initiativeId: 1,
+          name: 'Nuovo Template',
+          lang: 'en',
+          html: this.ckeditorContent,
+          attachments: attachments
+        })
+        .subscribe((resp: any) => console.log(resp));
+    } else {
+      this.api
+        .addAttachments({
+          ...this.template,
+          attachments: attachments
+        })
+        .subscribe((resp: any) => console.log(resp));
     }
   };
 }

@@ -1,14 +1,22 @@
+// ng modules
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { TreeModule } from 'ng2-tree';
 import { AngularSplitModule } from 'angular-split';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
+// app modules
+import { AppConfigModule } from './config/module';
+import { TemplatesModule } from './notifications/templates/module';
 
 // used to create fake backend
 // import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
+// import { BaseRequestOptions } from '@angular/http';
 
+// Components
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
@@ -17,15 +25,11 @@ import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService } from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
-import { TemplatesModule } from './notifications/templates/module';
 
 import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
 // import { HierarchiesService } from './hierarchies/service/hierarchies.service';
-import { AppConfigModule } from './config/module';
 // import { TemplateEditComponent } from './notifications/templates/template-edit/template-edit.component';
-
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -37,7 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     routing,
     TemplatesModule,
     AppConfigModule,
-    FlexLayoutModule
+    ButtonsModule
   ],
   declarations: [
     AppComponent,
@@ -46,13 +50,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LoginComponent,
     HierarchiesComponent,
     HierarchyTreeComponent,
-    // TemplateEditComponent
   ],
   providers: [
     AuthGuard,
     AlertService,
     AuthenticationService,
-//    HierarchiesService
   ],
   bootstrap: [AppComponent]
 })
