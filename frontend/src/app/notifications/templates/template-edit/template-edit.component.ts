@@ -44,7 +44,7 @@ export class TemplateEditComponent implements OnInit {
     this.testRecipient = 'test@email.me';
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onImageButtonClick(event) {
     this.browseImageFile.nativeElement.click();
@@ -67,7 +67,7 @@ export class TemplateEditComponent implements OnInit {
   }
   onTest(event) {
     event.preventDefault();
-    this.api.test({...this.template}, this.testRecipient).subscribe(res => console.log(res));
+    this.api.test({ ...this.template }, this.testRecipient).subscribe(res => console.log(res));
   }
 
   onImageSelected(event) {
@@ -89,25 +89,25 @@ export class TemplateEditComponent implements OnInit {
     target.form.reset();
   }
 
-  onFocus(event) {}
-  onBlur(event) {}
-  onChange(event) {}
+  onFocus(event) { }
+  onBlur(event) { }
+  onChange(event) { }
   onReady(event) {
     this.editorInstance = event.editor;
   }
 
   updateTemplate = () => {
-    const update =
-      undefined === this.template.id
-        ? this.api.save({
-            ...this.template,
-            html: this.ckeditorContent
-          })
-        : this.api.update({
-            ...this.template,
-            html: this.ckeditorContent
-          });
-    update.subscribe(resp => console.log(resp));
+    if (undefined === this.template.id) {
+      this.api.save({
+        ...this.template,
+        html: this.ckeditorContent
+      }).subscribe((resp: any) => this.template.id = resp.templateId);
+    } else {
+      this.api.update({
+        ...this.template,
+        html: this.ckeditorContent
+      }).subscribe(resp => console.log(resp));
+    }
   };
 
   addImages = (imageFiles: FileList) => {
@@ -130,6 +130,7 @@ export class TemplateEditComponent implements OnInit {
       this.api
         .addImages({
           ...this.template,
+          html: this.ckeditorContent,
           images: imageFiles
         })
         .flatMap(resp => this.api.render({ ...this.template }))
@@ -148,7 +149,7 @@ export class TemplateEditComponent implements OnInit {
           html: this.ckeditorContent,
           attachments: attachments
         })
-        .subscribe((resp: any) => console.log(resp));
+        .subscribe((resp: any) => { this.template.id = resp.templateId; });
     } else {
       this.api
         .addAttachments({

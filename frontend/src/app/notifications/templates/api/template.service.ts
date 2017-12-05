@@ -16,7 +16,7 @@ export class TemplateService {
     templateData.append('name', template.name);
     templateData.append('template', new Blob([template.html], { type: 'text/plain' }));
     // templateData.append('language', template.lang);
-    return this.http.put(this.appConfig.templatesUrl() + `/${template.id}`, templateData, { headers: this.headers });
+    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}`, templateData, { headers: this.headers });
   };
 
   save = (template: ITemplate) => {
@@ -32,14 +32,15 @@ export class TemplateService {
 
   addImages = (template: ITemplate) => {
     const templateData: FormData = new FormData();
+    templateData.append('template', new Blob([template.html], { type: 'text/plain' }));
     Array.from(template.images).map(img => templateData.append('images', img));
-    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/images`, templateData, { headers: this.headers });
+    return this.http.put(this.appConfig.templatesUrl() + `/${template.id}/images`, templateData, { headers: this.headers });
   };
 
   addAttachments = (template: ITemplate) => {
     const templateData: FormData = new FormData();
     Array.from(template.attachments).map(attach => templateData.append('attachments', attach));
-    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/attachments`, templateData, { headers: this.headers });
+    return this.http.put(this.appConfig.templatesUrl() + `/${template.id}/attachments`, templateData, { headers: this.headers });
   };
 
   render = (template: ITemplate) => {
@@ -47,8 +48,6 @@ export class TemplateService {
   };
 
   test = (template: ITemplate, sendTo: string) => {
-    const templateData: FormData = new FormData();
-    templateData.append('email', sendTo);
-    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/sendto`, templateData, { headers: this.headers });
+    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/sendto`, {email: sendTo}, { headers: this.headers });
   };
 }
