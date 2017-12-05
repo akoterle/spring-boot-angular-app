@@ -4,7 +4,8 @@ import 'rxjs/add/operator/mergeMap';
 import { TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
 import { ITemplate } from '../model';
-// const CKEDITOR = window['CKEDITOR'];
+
+const CKEDITOR = window['CKEDITOR'];
 
 @Component({
   selector: 'app-template-edit',
@@ -61,6 +62,14 @@ export class TemplateEditComponent implements OnInit {
 
   onImageSelected(event) {
     const target: HTMLInputElement = <HTMLInputElement>event.target;
+
+    const ckEditorInstance = CKEDITOR.instances.editor1;
+    const imageTag = `<img src="${target.files[0].name}" alt="">`;
+
+    const imageElement = CKEDITOR.dom.element.createFromHtml(imageTag, ckEditorInstance.document);
+    ckEditorInstance.insertElement(imageElement);
+
+    this.ckeditorContent = ckEditorInstance.getData();
     this.addImages(target.files);
     target.form.reset();
   }
@@ -97,8 +106,8 @@ export class TemplateEditComponent implements OnInit {
         .save({
           ...this.template,
           initiativeId: 1,
-          name: 'Nuovo Template',
-          lang: 'en',
+          name: this.template.name,
+          lang: this.template.lang,
           html: this.ckeditorContent,
           images: imageFiles
         })
@@ -124,8 +133,8 @@ export class TemplateEditComponent implements OnInit {
         .save({
           ...this.template,
           initiativeId: 1,
-          name: 'Nuovo Template',
-          lang: 'en',
+          name: this.template.name,
+          lang: this.template.lang,
           html: this.ckeditorContent,
           attachments: attachments
         })
