@@ -18,8 +18,8 @@ CKEDITOR.editorConfig = function(config) {
     { name: 'forms' },
     { name: 'tools' },
     { name: 'document', groups: ['mode', 'document', 'doctools'] },
-    { name: 'others' },
     '/',
+    { name: 'others' },
     { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
     { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
     { name: 'styles' },
@@ -33,6 +33,7 @@ CKEDITOR.editorConfig = function(config) {
   config.resize_enabled = false;
   config.allowedContent = true;
   config.height = 300;
+  config.language = 'it';
 
   // Upload images to a CKFinder connector (note that the response type is set to JSON).
   // config.uploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json';

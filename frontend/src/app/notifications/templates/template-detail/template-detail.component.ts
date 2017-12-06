@@ -8,6 +8,10 @@ import { AppConfig } from '../../../config/service';
 
 const CKEDITOR = window['CKEDITOR'];
 
+window['buildList'] = () => {
+  alert('Ive been called');
+};
+
 @Component({
   selector: 'app-template-detail',
   templateUrl: './template-detail.component.html',

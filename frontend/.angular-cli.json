@@ -10,15 +10,14 @@
       "assets": [
         "assets",
         "favicon.ico",
-        { "glob": "attachment.png", "input": "./", "output": "./icons/" },
+        { "glob": "attachment.png", "input": "./assets/", "output": "./icons/" },
         { "glob": "styles.js", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
+        { "glob": "config.js", "input": "./libs/ckeditor/", "output": "./ckeditor/" },
         { "glob": "contents.css", "input": "../node_modules/ckeditor/", "output": "./ckeditor/" },
-        { "glob": "config.js", "input": "./3rdParties/ckeditor/", "output": "./ckeditor/" },
         { "glob": "**/*", "input": "../node_modules/ckeditor/lang/", "output": "./ckeditor/lang/" },
         { "glob": "**/*", "input": "../node_modules/ckeditor/plugins/", "output": "./ckeditor/plugins/" },
-        { "glob": "**/*", "input": "./3rdParties/ckeditor/plugins/", "output": "./ckeditor/plugins/" },
         { "glob": "**/*", "input": "../node_modules/ckeditor/skins/", "output": "./ckeditor/skins/" },
-        { "glob": "**/*", "input": "../node_modules/fine-uploader/fine-uploader/placeholders/", "output": "./fine-uploader/placeholders/" }
+        { "glob": "**/*", "input": "./libs/ckeditor/plugins/", "output": "./ckeditor/plugins/" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -27,7 +26,11 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": ["styles.css", "../node_modules/bootstrap/dist/css/bootstrap.min.css", "../node_modules/ng2-tree/styles.css"],
+      "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/ng2-tree/styles.css",
+        "styles.css"
+      ],
       "scripts": [
         "../node_modules/ckeditor/ckeditor.js",
         "../node_modules/jquery/dist/jquery.slim.js",

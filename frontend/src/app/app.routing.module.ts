@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/notification/templates', pathMatch: 'full' },
+  /* { path: '', redirectTo: '/notification/templates', pathMatch: 'full' },*/
   // { path: '**', component: PageNotFoundComponent }
 ];
 

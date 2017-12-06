@@ -10,9 +10,9 @@
       // Gets the list of tags from the settings.
       var tags = []; //new Array();
       //this.add('value', 'drop_text', 'drop_label');
-      tags[0] = ['[[NomeUtente]]', 'Nome utente', 'firstName'];
-      tags[1] = ['[contact_email]', 'email', 'email'];
-      tags[2] = ['[contact_user_name]', 'User name', 'User name'];
+      tags[0] = ['[[NomeUtente]]', 'Nome utente', 'Nome utente'];
+      // tags[1] = ['[contact_email]', 'email', 'email'];
+      // tags[2] = ['[contact_user_name]', 'User name', 'User name'];
 
       // Create style objects for all defined styles.
 
@@ -29,17 +29,20 @@
         },
 
         init: function() {
-          //this.startGroup('Tokens');
+          this.startGroup('Tokens');
           //this.add('value', 'drop_text', 'drop_label');
           for (var this_tag in tags) {
             this.add(tags[this_tag][0], tags[this_tag][1], tags[this_tag][2]);
           }
+          var rebuildList = CKEDITOR.tools.bind(buildList, this);
+          rebuildList();
+          $(editor).bind('rebuildList', rebuildList);
         },
 
         onClick: function(value) {
           editor.focus();
           editor.fire('saveSnapshot');
-          editor.insertText(value);
+          editor.insertHtml(value);
           editor.fire('saveSnapshot');
         }
       });
