@@ -8,7 +8,35 @@ import { AppConfig } from '../../../config/service';
 
 const CKEDITOR = window['CKEDITOR'];
 
-window['buildList'] = () => {
+var buildListHasRunOnce = 0;
+var tags = [];
+tags[0] = ['[[a]]', 'a', 'a'];
+tags[1] = ['[[b]]', 'b', 'b'];
+
+const buildList = () => {
+  var self = this;
+  if (buildListHasRunOnce) {
+    // Remove the old unordered list from the dom.
+    // This is just to cleanup the old list within the iframe
+    $(self._.panel._.iframe.$)
+      .contents()
+      .find('ul')
+      .remove();
+    // reset list
+    self._.items = {};
+    self._.list._.items = {};
+  }
+  for (var i in tags) {
+    var item = tags[i];
+    // do your add calls
+    self.add(item[0], item[1], item[2]);
+  }
+  if (buildListHasRunOnce) {
+    // Force CKEditor to commit the html it generates through this.add
+    self._.committed = 0; // We have to set to false in order to trigger a complete commit()
+    self.commit();
+  }
+  buildListHasRunOnce = 1;
   alert('Ive been called');
 };
 
@@ -88,6 +116,7 @@ export class TemplateDetailComponent implements OnInit {
   onChange(event) {}
   onReady(event) {
     this.editorInstance = event.editor;
+    this.editorInstance.buildList = buildList;
   }
 
   updateTemplate = () => {

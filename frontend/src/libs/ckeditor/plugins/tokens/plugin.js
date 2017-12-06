@@ -34,7 +34,8 @@
           for (var this_tag in tags) {
             this.add(tags[this_tag][0], tags[this_tag][1], tags[this_tag][2]);
           }
-          var rebuildList = CKEDITOR.tools.bind(buildList, this);
+          //editor.buildList = undefined
+          var rebuildList = CKEDITOR.tools.bind(editor.buildList, this);
           rebuildList();
           $(editor).bind('rebuildList', rebuildList);
         },

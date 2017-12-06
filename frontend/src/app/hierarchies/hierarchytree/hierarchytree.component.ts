@@ -5,7 +5,6 @@ import uuid from 'uuid';
 
 @Component({
   selector: 'app-hierarchytree',
-  providers: [HierarchiesService],
   template: `
   <div class="tree-demo-app">
   <div class="tree-container">

@@ -34,6 +34,7 @@ CKEDITOR.editorConfig = function(config) {
   config.allowedContent = true;
   config.height = 300;
   config.language = 'it';
+  config.skin = 'moonocolor';
 
   // Upload images to a CKFinder connector (note that the response type is set to JSON).
   // config.uploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json';
