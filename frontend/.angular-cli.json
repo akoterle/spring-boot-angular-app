@@ -16,6 +16,7 @@
         { "glob": "config.js", "input": "./3rdParties/ckeditor/", "output": "./ckeditor/" },
         { "glob": "**/*", "input": "../node_modules/ckeditor/lang/", "output": "./ckeditor/lang/" },
         { "glob": "**/*", "input": "../node_modules/ckeditor/plugins/", "output": "./ckeditor/plugins/" },
+        { "glob": "**/*", "input": "./3rdParties/ckeditor/plugins/", "output": "./ckeditor/plugins/" },
         { "glob": "**/*", "input": "../node_modules/ckeditor/skins/", "output": "./ckeditor/skins/" },
         { "glob": "**/*", "input": "../node_modules/fine-uploader/fine-uploader/placeholders/", "output": "./fine-uploader/placeholders/" }
       ],
@@ -27,7 +28,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": ["styles.css", "../node_modules/bootstrap/dist/css/bootstrap.min.css", "../node_modules/ng2-tree/styles.css"],
-      "scripts": ["../node_modules/ckeditor/ckeditor.js", "../node_modules/fine-uploader/fine-uploader/fine-uploader.min.js"],
+      "scripts": [
+        "../node_modules/ckeditor/ckeditor.js",
+        "../node_modules/jquery/dist/jquery.slim.js",
+        "../node_modules/popper.js/dist/umd/popper.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

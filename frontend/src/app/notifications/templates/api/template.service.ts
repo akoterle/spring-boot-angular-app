@@ -1,15 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { ITemplate } from '../model';
 import { AppConfig } from '../../../config/service';
+import { TEMPLATES } from './mock-template-list';
+
+export interface ITemplate {
+  id: number;
+  initiativeId: number;
+  name: string;
+  html: string;
+  lang: string;
+  images: FileList;
+  attachments: FileList;
+}
 
 @Injectable()
 export class TemplateService {
   bearer = 'Bearer 168bf7db-d142-4907-8eec-4affc9745a01';
   headers = new HttpHeaders().set('Authorization', this.bearer);
+  templates: ITemplate[] = TEMPLATES;
   constructor(private http: HttpClient, private appConfig: AppConfig) {}
-  list = (initiativeId: string) => this.http.get(this.appConfig.templatesUrl());
+
+  // list = (initiativeId: string) => this.http.get(this.appConfig.templatesUrl());
+
+  list = (initiativeId: string) => Observable.of(TEMPLATES);
+  getTemplate(id: number | string) {
+    return Observable.of(TEMPLATES)
+      // (+) before `id` turns the string into a number
+      .map(heroes => heroes.find(hero => hero.id === +id));
+  }
 
   update = (template: ITemplate) => {
     const templateData: FormData = new FormData();

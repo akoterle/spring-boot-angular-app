@@ -10,7 +10,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 // app modules
 import { AppConfigModule } from './config/module';
-import { TemplatesModule } from './notifications/templates/module';
+import { TemplatesModule } from './notifications/templates/templates.module';
 
 // used to create fake backend
 // import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -28,8 +28,7 @@ import { LoginComponent } from './login/index';
 
 import { HierarchiesComponent } from './hierarchies/hierarchies.component';
 import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytree.component';
-// import { HierarchiesService } from './hierarchies/service/hierarchies.service';
-// import { TemplateEditComponent } from './notifications/templates/template-edit/template-edit.component';
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   imports: [
@@ -41,6 +40,7 @@ import { HierarchyTreeComponent } from './hierarchies/hierarchytree/hierarchytre
     routing,
     TemplatesModule,
     AppConfigModule,
+    AppRoutingModule,
     ButtonsModule
   ],
   declarations: [

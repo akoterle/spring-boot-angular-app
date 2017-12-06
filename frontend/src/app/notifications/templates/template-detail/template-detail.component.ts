@@ -1,19 +1,20 @@
 import { Component, Input, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
-import { TemplateService } from '../api/template.service';
+import { ITemplate, TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
-import { ITemplate } from '../model';
 
 const CKEDITOR = window['CKEDITOR'];
 
 @Component({
-  selector: 'app-template-edit',
-  templateUrl: './template-edit.component.html',
-  styleUrls: ['./template-edit.component.css'],
+  selector: 'app-template-detail',
+  templateUrl: './template-detail.component.html',
+  styleUrls: ['./template-detail.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class TemplateEditComponent implements OnInit {
+export class TemplateDetailComponent implements OnInit {
   ckeditorContent: string;
   testRecipient: string;
   uploadImageEndpoint: string;
@@ -26,25 +27,13 @@ export class TemplateEditComponent implements OnInit {
   @ViewChild('uploadAttachmentForm') uploadAttachmentForm: ElementRef;
   @ViewChild('browseAttachment') browseAttachment: ElementRef;
 
-  @Input()
-  set templateId(id: number) {
-    this.template.id = id;
-  }
-
-  constructor(private api: TemplateService) {
-    this.template = {
-      id: undefined,
-      initiativeId: 1,
-      name: 'Nuovo Template',
-      lang: 'en',
-      html: this.ckeditorContent,
-      images: undefined,
-      attachments: undefined
-    };
+  constructor(private api: TemplateService, private route: ActivatedRoute, private router: Router) {
     this.testRecipient = 'test@email.me';
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.route.paramMap.switchMap((params: ParamMap) => this.api.getTemplate(params.get('id'))).subscribe(t => (this.template = t));
+  }
 
   onImageButtonClick(event) {
     this.browseImageFile.nativeElement.click();
@@ -65,6 +54,7 @@ export class TemplateEditComponent implements OnInit {
   isTemplateValid() {
     return this.template.id !== undefined;
   }
+
   onTest(event) {
     event.preventDefault();
     this.api.test({ ...this.template }, this.testRecipient).subscribe(res => console.log(res));
@@ -73,7 +63,7 @@ export class TemplateEditComponent implements OnInit {
   onImageSelected(event) {
     const target: HTMLInputElement = <HTMLInputElement>event.target;
 
-    const ckEditorInstance = CKEDITOR.instances.editor1;
+    const ckEditorInstance = this.editorInstance; // CKEDITOR.instances.editor1;
     const imageTag = `<img src="${target.files[0].name}" alt="">`;
 
     const imageElement = CKEDITOR.dom.element.createFromHtml(imageTag, ckEditorInstance.document);
@@ -89,24 +79,28 @@ export class TemplateEditComponent implements OnInit {
     target.form.reset();
   }
 
-  onFocus(event) { }
-  onBlur(event) { }
-  onChange(event) { }
+  onFocus(event) {}
+  onBlur(event) {}
+  onChange(event) {}
   onReady(event) {
     this.editorInstance = event.editor;
   }
 
   updateTemplate = () => {
     if (undefined === this.template.id) {
-      this.api.save({
-        ...this.template,
-        html: this.ckeditorContent
-      }).subscribe((resp: any) => this.template.id = resp.templateId);
+      this.api
+        .save({
+          ...this.template,
+          html: this.ckeditorContent
+        })
+        .subscribe((resp: any) => (this.template.id = resp.templateId));
     } else {
-      this.api.update({
-        ...this.template,
-        html: this.ckeditorContent
-      }).subscribe(resp => console.log(resp));
+      this.api
+        .update({
+          ...this.template,
+          html: this.ckeditorContent
+        })
+        .subscribe(resp => console.log(resp));
     }
   };
 
@@ -149,7 +143,9 @@ export class TemplateEditComponent implements OnInit {
           html: this.ckeditorContent,
           attachments: attachments
         })
-        .subscribe((resp: any) => { this.template.id = resp.templateId; });
+        .subscribe((resp: any) => {
+          this.template.id = resp.templateId;
+        });
     } else {
       this.api
         .addAttachments({

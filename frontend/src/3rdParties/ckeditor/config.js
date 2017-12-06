@@ -27,9 +27,11 @@ CKEDITOR.editorConfig = function(config) {
     { name: 'about' }
   ];
 
-  config.extraPlugins = 'image2,placeholder';
+  // [config]="{extraPlugins: 'divarea'}"
+  config.extraPlugins = 'divarea,placeholder,richcombo,tokens';
 
-  (config.resize_enabled = false), (config.allowedContent = true);
+  config.resize_enabled = false;
+  config.allowedContent = true;
   config.height = 300;
 
   // Upload images to a CKFinder connector (note that the response type is set to JSON).
@@ -44,10 +46,10 @@ CKEDITOR.editorConfig = function(config) {
   // The following options are not necessary and are used here for presentation purposes only.
   // They configure the Styles drop-down list and widgets to use classes.
 
-  config.stylesSet = [
-    { name: 'Narrow image', type: 'widget', widget: 'image', attributes: { class: 'image-narrow' } },
-    { name: 'Wide image', type: 'widget', widget: 'image', attributes: { class: 'image-wide' } }
-  ];
+  // config.stylesSet = [
+  //   { name: 'Narrow image', type: 'widget', widget: 'image', attributes: { class: 'image-narrow' } },
+  //   { name: 'Wide image', type: 'widget', widget: 'image', attributes: { class: 'image-wide' } }
+  // ];
 
   // Load the default contents.css file plus customizations for this sample.
   // config.contentsCss = [CKEDITOR.basePath + 'contents.css', 'http://sdk.ckeditor.com/samples/assets/css/widgetstyles.css'];
@@ -55,8 +57,9 @@ CKEDITOR.editorConfig = function(config) {
   // Configure the Enhanced Image plugin to use classes instead of styles and to disable the
   // resizer (because image size is controlled by widget styles or the image takes maximum
   // 100% of the editor width).
-  config.image2_alignClasses = ['image-align-left', 'image-align-center', 'image-align-right'];
-  config.image2_disableResizer = true;
+
+  // config.image2_alignClasses = ['image-align-left', 'image-align-center', 'image-align-right'];
+  // config.image2_disableResizer = true;
 
   // Remove some buttons provided by the standard plugins, which are
   // not needed in the Standard(s) toolbar.
@@ -67,5 +70,5 @@ CKEDITOR.editorConfig = function(config) {
 
   // Simplify the dialog windows.
   config.removeDialogTabs = 'image:advanced;image:upload;image:Link;link:advanced';
-  config.filebrowserImageUploadUrl = '/uploader/upload.php?type=Images';
+  // config.filebrowserImageUploadUrl = '/uploader/upload.php?type=Images';
 };

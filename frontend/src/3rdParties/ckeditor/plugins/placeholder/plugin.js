@@ -59,7 +59,7 @@
 			editor.ui.addButton && editor.ui.addButton( 'CreatePlaceholder', {
 				label: lang.toolbar,
 				command: 'placeholder',
-				toolbar: 'insert,5',
+				toolbar: 'tools,5',
 				icon: 'placeholder'
 			} );
 		},
