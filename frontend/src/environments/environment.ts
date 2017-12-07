@@ -11,7 +11,8 @@ export const environment = {
     },
     notifications: {
       templates: '/notification/v1/templates',
-      uploadFiles: '/notification/v1/templates'
+      uploadFiles: '/notification/v1/templates',
+      initiatives: '/notification/v1/initiatives',
     }
   }
 };

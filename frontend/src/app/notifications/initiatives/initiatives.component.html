@@ -1,5 +1,6 @@
-<select name="Initiatives" ngControl="initiative" #Initiatives="ngModel" [ngModel]="initiatives | async">
-  <option *ngFor="let initiative of initiatives | async" [value]="initiative.id">{{initiative.name}}</option>
+
+<select name="Initiatives" ngControl="initiative" #Initiatives="ngModel" [ngModel]="initiatives | async" (change)="onChange($event)" [(ngModel)]="selectedInitiative">
+  <option *ngFor="let initiative of initiatives | async" [ngValue]="initiative">{{initiative.name}}</option>
 </select>
 
 

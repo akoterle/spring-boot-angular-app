@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ITemplate, TemplateService } from '../api/template.service';
+import { IInitiative } from '../../initiatives/service/initiative.service';
+import { initDomAdapter } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-template-list',
@@ -12,12 +14,18 @@ import { ITemplate, TemplateService } from '../api/template.service';
 export class TemplateListComponent implements OnInit {
   templates: Observable<ITemplate[]>;
   selectedId: number;
+  onInitiativeChangeFn: Function;
   constructor(private api: TemplateService) {
     this.selectedId = 1;
+    this.onInitiativeChangeFn = this.onInitiativeChange.bind(this);
   }
 
+  onInitiativeChange = (initiative: IInitiative) => {
+    this.templates = this.api.list(initiative);
+  };
+
   ngOnInit() {
-    this.templates = this.api.list('anyApp');
+    this.templates = this.api.list({ id: 1, name: 'any' });
   }
 
   // @Input() appName: string;

@@ -1,3 +1,4 @@
+<app-initiatives [onSelectionChange]="onInitiativeChangeFn"></app-initiatives>
 <ul class="items">
   <li *ngFor="let template of templates | async" [class.selected]="template.id === selectedId">
     <a [routerLink]="['/template', template.id]">

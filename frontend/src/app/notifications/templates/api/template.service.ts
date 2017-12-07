@@ -3,6 +3,7 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AppConfig } from '../../../config/service';
 import { TEMPLATES } from './mock-template-list';
+import { IInitiative } from '../../initiatives/service/initiative.service';
 
 export interface ITemplate {
   id: number;
@@ -21,13 +22,16 @@ export class TemplateService {
   templates: ITemplate[] = TEMPLATES;
   constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
-  // list = (initiativeId: string) => this.http.get(this.appConfig.templatesUrl());
+  // list = (initiativeId: number) => Observable.of(TEMPLATES);
 
-  list = (initiativeId: string) => Observable.of(TEMPLATES);
+  list = (initiative: IInitiative) => this.http.get<ITemplate[]>(this.appConfig.templatesUrl() + `/${initiative.id}`);
+
   getTemplate(id: number | string) {
-    return Observable.of(TEMPLATES)
-      // (+) before `id` turns the string into a number
-      .map(heroes => heroes.find(hero => hero.id === +id));
+    return (
+      Observable.of(TEMPLATES)
+        // (+) before `id` turns the string into a number
+        .map(heroes => heroes.find(hero => hero.id === +id))
+    );
   }
 
   update = (template: ITemplate) => {
@@ -67,6 +71,6 @@ export class TemplateService {
   };
 
   test = (template: ITemplate, sendTo: string) => {
-    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/sendto`, {email: sendTo}, { headers: this.headers });
+    return this.http.post(this.appConfig.templatesUrl() + `/${template.id}/sendto`, { email: sendTo }, { headers: this.headers });
   };
 }

@@ -16,6 +16,6 @@ export class InitiativeService {
   initiatives: IInitiative[] = INITIATIVES;
   constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
-  list = () => Observable.of(this.initiatives);
+  list = () => this.http.get<IInitiative[]>(this.appConfig.initiativesUrl());
 
 }
