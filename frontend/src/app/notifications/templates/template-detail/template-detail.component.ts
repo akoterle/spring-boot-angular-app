@@ -5,6 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { ITemplate, TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
+import { $} from 'jquery';
 
 const CKEDITOR = window['CKEDITOR'];
 

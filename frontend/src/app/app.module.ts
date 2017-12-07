@@ -12,7 +12,7 @@ import { Http } from '@angular/http';
 // app modules
 import { AppConfigModule } from './config/module';
 import { TemplatesModule } from './notifications/templates/templates.module';
-import { HierarchiesModule } from './hierarchies/hierarchies.module';
+//import { HierarchiesModule } from './hierarchies/hierarchies.module';
 // used to create fake backend
 // import { MockBackend, MockConnection } from '@angular/http/testing';
 // import { BaseRequestOptions } from '@angular/http';
