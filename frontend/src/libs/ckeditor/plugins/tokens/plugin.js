@@ -16,10 +16,10 @@
 
       // Create style objects for all defined styles.
 
-      editor.ui.addRichCombo('tokens', {
-        label: 'Placeholders',
-        title: 'Placeholders',
-        voiceLabel: 'Placeholders',
+      editor.ui.addRichCombo('placeholders', {
+        label: 'Segnaposto',
+        title: 'Segnaposto',
+        voiceLabel: 'Segnaposto',
         className: 'cke_format',
         multiSelect: false,
 
@@ -29,15 +29,17 @@
         },
 
         init: function() {
-          this.startGroup('Tokens');
+          
+          this.startGroup('Segnaposto');
           //this.add('value', 'drop_text', 'drop_label');
           for (var this_tag in tags) {
             this.add(tags[this_tag][0], tags[this_tag][1], tags[this_tag][2]);
           }
-          //editor.buildList = undefined
-          var rebuildList = CKEDITOR.tools.bind(editor.buildList, this);
-          rebuildList();
-          $(editor).bind('rebuildList', rebuildList);
+          // editor.buildList = undefined
+          // var rebuildList = CKEDITOR.tools.bind(editor.buildList, this);
+          // rebuildList();
+          // $(editor).bind('rebuildList', rebuildList);
+          this._.list.element.setAttribute('title', 'Segnaposto')
         },
 
         onClick: function(value) {
@@ -46,7 +48,7 @@
           editor.insertHtml(value);
           editor.fire('saveSnapshot');
         }
-      });
+      }); // .setAttribute('aria-label', 'Tokens');;
     }
   });
 })();

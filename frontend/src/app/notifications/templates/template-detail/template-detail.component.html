@@ -9,11 +9,11 @@
     <div class="col-8" style="padding: 10px">
       <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event)" (ready)="onReady($event)" (focus)="onFocus($event)"
         (blur)="onBlur($event)" debounce="500">
-        <ckbutton [name]="'insertImageButton'" [command]="'insertImage'" (click)="onImageButtonClick($event)" [icon]="'/ckeditor/plugins/image2/icons/image.png?t=H8DC'"
-          [label]="'Insert Image'" [toolbar]="'forms,1'">
+        <ckbutton [name]="'insertImageButton'" [command]="'insertImage'" (click)="onImageButtonClick($event)" [icon]="'/ckeditor/icons/picture_add.png?t=H8DC'"
+          [label]="'Inserisci immagine'" [toolbar]="'forms,1'">
         </ckbutton>
         <ckbutton [name]="'insertAttachmentButton'" [command]="'insertAttachment'" (click)="onAttachmentButtonClick($event)" [icon]="'/ckeditor/icons/attachment.png?t=H8DC'"
-          [label]="'Add attachment'" [toolbar]="'forms,2'">
+          [label]="'Aggiungi allegato'" [toolbar]="'forms,2'">
         </ckbutton>
       </ckeditor>
       <form #uploadImageForm method='POST' enctype='multipart/form-data'>
