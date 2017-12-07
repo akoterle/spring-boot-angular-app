@@ -6,16 +6,17 @@ import { INITIATIVES } from './mock.initiative.list';
 
 export interface IInitiative {
   id: number;
-  name: string;
+  code: string;
+  title: string;
 }
 
 @Injectable()
 export class InitiativeService {
-  bearer = 'Bearer 168bf7db-d142-4907-8eec-4affc9745a01';
+  bearer = 'Bearer 1b46f5c6-fdc9-4afe-9b69-0cc6228fbbbf';
   headers = new HttpHeaders().set('Authorization', this.bearer);
   initiatives: IInitiative[] = INITIATIVES;
   constructor(private http: HttpClient, private appConfig: AppConfig) {}
 
-  list = () => this.http.get<IInitiative[]>(this.appConfig.initiativesUrl());
+  list = () => this.http.get<IInitiative[]>(this.appConfig.initiativesUrl(), { headers: this.headers });
 
 }

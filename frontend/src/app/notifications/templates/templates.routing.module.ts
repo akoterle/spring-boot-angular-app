@@ -7,7 +7,9 @@ import { TemplatesComponent } from './templates.component';
 const templatesRoutes: Routes = [
   { path: 'templates', redirectTo: '/notification/templates' },
   { path: 'template/:id', redirectTo: '/notification/template/:id' },
+  { path: 'template', redirectTo: '/notification/template' },
   { path: 'notification/templates', component: TemplatesComponent },
+  { path: 'notification/template', component: TemplateDetailComponent },
   { path: 'notification/template/:id', component: TemplateDetailComponent }
 ];
 

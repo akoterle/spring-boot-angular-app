@@ -13,6 +13,7 @@ import { initDomAdapter } from '@angular/platform-browser/src/browser';
 })
 export class TemplateListComponent implements OnInit {
   templates: Observable<ITemplate[]>;
+  // templates: ITemplate[];
   selectedId: number;
   onInitiativeChangeFn: Function;
   constructor(private api: TemplateService) {
@@ -21,11 +22,13 @@ export class TemplateListComponent implements OnInit {
   }
 
   onInitiativeChange = (initiative: IInitiative) => {
-    this.templates = this.api.list(initiative);
+    // this.templates = this.api.list(initiative);
+    //this.api.all().subscribe(res => this.templates = res);
   };
 
   ngOnInit() {
-    this.templates = this.api.list({ id: 1, name: 'any' });
+    //this.api.all().subscribe(res => this.templates = res);
+    this.templates = this.api.all();
   }
 
   // @Input() appName: string;

@@ -9,7 +9,8 @@ import { Observable } from 'rxjs/Observable';
   encapsulation: ViewEncapsulation.None
 })
 export class InitiativesComponent implements OnInit {
-  initiatives: Observable<IInitiative[]>;
+  // initiatives: Observable<IInitiative[]>;
+  initiatives: IInitiative[];
   selectedInitiative: IInitiative;
   constructor(private api: InitiativeService) {}
 
@@ -17,6 +18,6 @@ export class InitiativesComponent implements OnInit {
   onChange = event => this.onSelectionChange(this.selectedInitiative);
 
   ngOnInit() {
-    this.initiatives = this.api.list();
+     this.api.list().subscribe(res => this.initiatives = res);
   }
 }

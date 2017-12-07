@@ -5,41 +5,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { ITemplate, TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
-import { $} from 'jquery';
+import { $ } from 'jquery';
 
 const CKEDITOR = window['CKEDITOR'];
-
-var buildListHasRunOnce = 0;
-var tags = [];
-tags[0] = ['[[a]]', 'a', 'a'];
-tags[1] = ['[[b]]', 'b', 'b'];
-
-const buildList = () => {
-  var self = this;
-  if (buildListHasRunOnce) {
-    // Remove the old unordered list from the dom.
-    // This is just to cleanup the old list within the iframe
-    $(self._.panel._.iframe.$)
-      .contents()
-      .find('ul')
-      .remove();
-    // reset list
-    self._.items = {};
-    self._.list._.items = {};
-  }
-  for (var i in tags) {
-    var item = tags[i];
-    // do your add calls
-    self.add(item[0], item[1], item[2]);
-  }
-  if (buildListHasRunOnce) {
-    // Force CKEditor to commit the html it generates through this.add
-    self._.committed = 0; // We have to set to false in order to trigger a complete commit()
-    self.commit();
-  }
-  buildListHasRunOnce = 1;
-  alert('Ive been called');
-};
 
 @Component({
   selector: 'app-template-detail',
@@ -62,10 +30,27 @@ export class TemplateDetailComponent implements OnInit {
 
   constructor(private api: TemplateService, private route: ActivatedRoute, private router: Router) {
     this.testRecipient = 'test@email.me';
+    const newTemplate: ITemplate = {
+      id: undefined,
+      initiativeId: 1,
+      name: 'Nuovo Template',
+      html: '',
+      lang: 'en',
+      images: undefined,
+      attachments: undefined
+    };
+    this.template = { ...newTemplate };
+
   }
 
   ngOnInit() {
-    this.route.paramMap.switchMap((params: ParamMap) => this.api.getTemplate(params.get('id'))).subscribe(t => (this.template = t));
+    const f = (params: ParamMap) => this.api.getTemplate(params.get('id'));
+    this.route.paramMap.switchMap((params: ParamMap) => f(params)).subscribe(t => {
+      this.template = { ...t };
+
+      this.ckeditorContent = this.template.html;
+    });
+
   }
 
   onImageButtonClick(event) {
@@ -112,12 +97,11 @@ export class TemplateDetailComponent implements OnInit {
     target.form.reset();
   }
 
-  onFocus(event) {}
-  onBlur(event) {}
-  onChange(event) {}
+  onFocus(event) { }
+  onBlur(event) { }
+  onChange(event) { }
   onReady(event) {
     this.editorInstance = event.editor;
-    this.editorInstance.buildList = buildList;
   }
 
   updateTemplate = () => {

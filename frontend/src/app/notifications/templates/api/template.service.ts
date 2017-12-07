@@ -17,21 +17,26 @@ export interface ITemplate {
 
 @Injectable()
 export class TemplateService {
-  bearer = 'Bearer 168bf7db-d142-4907-8eec-4affc9745a01';
+  bearer = 'Bearer 1b46f5c6-fdc9-4afe-9b69-0cc6228fbbbf';
   headers = new HttpHeaders().set('Authorization', this.bearer);
   templates: ITemplate[] = TEMPLATES;
-  constructor(private http: HttpClient, private appConfig: AppConfig) {}
+  constructor(private http: HttpClient, private appConfig: AppConfig) { }
 
-  // list = (initiativeId: number) => Observable.of(TEMPLATES);
+  // list = (initiativeId: IInitiative) => Observable.of(TEMPLATES);
 
-  list = (initiative: IInitiative) => this.http.get<ITemplate[]>(this.appConfig.templatesUrl() + `/${initiative.id}`);
+  list = (initiative: IInitiative) => {
+    return this.http.get<ITemplate[]>(this.appConfig.templatesUrl() + `/${initiative.id}`, { headers: this.headers });
+  }
+
+  all = () => this.http.get<ITemplate[]>(this.appConfig.templatesUrl(), { headers: this.headers });
 
   getTemplate(id: number | string) {
-    return (
+    return this.http.get<ITemplate>(this.appConfig.templatesUrl() + `/${id}`, { headers: this.headers });
+    /*return (
       Observable.of(TEMPLATES)
         // (+) before `id` turns the string into a number
         .map(heroes => heroes.find(hero => hero.id === +id))
-    );
+    );*/
   }
 
   update = (template: ITemplate) => {
