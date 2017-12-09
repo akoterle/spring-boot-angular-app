@@ -1,24 +1,4 @@
-
-<select name="Initiatives" ngControl="initiative" #Initiatives="ngModel" [ngModel]="initiatives" (change)="onChange($event)" [(ngModel)]="selectedInitiative">
-  <option *ngFor="let initiative of initiatives" [ngValue]="initiative">{{initiative.title}}</option>
+<select class="form-control" (change)="onChange($event)" [(ngModel)]="selectedInitiative">
+  <option disabled hidden [value]="undefined">{{emptyOptionMessageText}}</option>
+  <option *ngFor="let initiative of initiatives | async" [ngValue]="initiative">{{initiative.title}}</option>
 </select>
-
-
-<!-- <div class="form-group">
-  <label for="initiativeList">Selezionare l'iniziativa</label>
-  <select [ngModel]="initiatives | async" (ngModelChange)="onInitiativeSelection($event)" class="form-control" id="initiativeList">
-    <option value="default">Seleziona un'iniziativa</option>
-    <option *ngFor="let initiative of initiatives | async" [ngValue]="initiative">{{ initiative.name }}</option>
-  </select>
-</div> -->
-
-
-<!-- <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-    aria-expanded="false">
-    Iniziative
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a *ngFor="let initiative of initiatives | async" class="dropdown-item" href="#">{{initiative.name}}</a>
-  </div>
-</div> -->

@@ -5,7 +5,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { ITemplate, TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
-import { $ } from 'jquery';
 
 const CKEDITOR = window['CKEDITOR'];
 
@@ -35,7 +34,7 @@ export class TemplateDetailComponent implements OnInit {
       initiativeId: 1,
       name: 'Nuovo Template',
       html: '',
-      lang: 'en',
+      language: 'en',
       images: undefined,
       attachments: undefined
     };
@@ -129,7 +128,7 @@ export class TemplateDetailComponent implements OnInit {
           ...this.template,
           initiativeId: 1,
           name: this.template.name,
-          lang: this.template.lang,
+          language: this.template.language,
           html: this.ckeditorContent,
           images: imageFiles
         })
@@ -157,7 +156,7 @@ export class TemplateDetailComponent implements OnInit {
           ...this.template,
           initiativeId: 1,
           name: this.template.name,
-          lang: this.template.lang,
+          language: this.template.language,
           html: this.ckeditorContent,
           attachments: attachments
         })

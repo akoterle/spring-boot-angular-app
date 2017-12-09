@@ -9,15 +9,16 @@ import { Observable } from 'rxjs/Observable';
   encapsulation: ViewEncapsulation.None
 })
 export class InitiativesComponent implements OnInit {
-  // initiatives: Observable<IInitiative[]>;
-  initiatives: IInitiative[];
+  initiatives: Observable<IInitiative[]>;
   selectedInitiative: IInitiative;
+  emptyOptionMessageText = 'Seleziona l\'iniziativa';
   constructor(private api: InitiativeService) {}
 
-  @Input() onSelectionChange: Function;
-  onChange = event => this.onSelectionChange(this.selectedInitiative);
+  @Output() onInitiativeChange = new EventEmitter<IInitiative>();
+
+  onChange = event => this.onInitiativeChange.emit(this.selectedInitiative);
 
   ngOnInit() {
-     this.api.list().subscribe(res => this.initiatives = res);
+    this.initiatives = this.api.list();
   }
 }

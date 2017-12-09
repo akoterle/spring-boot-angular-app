@@ -10,7 +10,7 @@ export interface ITemplate {
   initiativeId: number;
   name: string;
   html: string;
-  lang: string;
+  language: string;
   images: FileList;
   attachments: FileList;
 }
@@ -52,7 +52,7 @@ export class TemplateService {
     templateData.append('initiativeId', template.initiativeId.toString());
     templateData.append('name', template.name);
     templateData.append('template', new Blob([template.html], { type: 'text/plain' }));
-    templateData.append('language', template.lang);
+    templateData.append('language', template.language);
     Array.from(template.images || []).map(img => templateData.append('images', img));
     Array.from(template.attachments || []).map(attach => templateData.append('attachments', attach));
     return this.http.post(this.appConfig.templatesUrl(), templateData, { headers: this.headers });

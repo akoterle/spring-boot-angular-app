@@ -1,4 +1,5 @@
 // ng modules
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { Http } from '@angular/http';
 // app modules
 import { AppConfigModule } from './config/module';
 import { TemplatesModule } from './notifications/templates/templates.module';
-//import { HierarchiesModule } from './hierarchies/hierarchies.module';
+// import { HierarchiesModule } from './hierarchies/hierarchies.module'; 
 // used to create fake backend
 // import { MockBackend, MockConnection } from '@angular/http/testing';
 // import { BaseRequestOptions } from '@angular/http';
@@ -42,7 +43,9 @@ import { AppRoutingModule } from './app.routing.module';
     TemplatesModule,
     AppConfigModule,
     AppRoutingModule,
-    ButtonsModule
+    ButtonsModule,
+    BsDropdownModule,
+    
   ],
   declarations: [
     AppComponent,
