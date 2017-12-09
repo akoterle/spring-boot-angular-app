@@ -5,9 +5,9 @@
   
 }
 .list-box {
-  border: 1px solid #ced4da;
+  /* border: 1px solid #ced4da;
   border-radius: .25rem;
-  margin-top: 15px;
+  margin-top: 15px; */
 }
 .header {
   display: flex;

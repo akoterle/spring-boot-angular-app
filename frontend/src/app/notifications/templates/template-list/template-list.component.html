@@ -8,17 +8,17 @@
       </div>
     </div>
     <div class="row no-gutters list-box">
-      <div *ngIf="showList()" class="col">
-        <div *ngIf="(templates | async); let templates; else loadingStatus">
-          <ul *ngIf="loadSuccess() else loadingStatus" class="list-group selection-box">
+      <div *ngIf="isReadyToShowList()" class="col">
+        <div *ngIf="(state.templates | async); let templates; else statusRenderer">
+          <ul *ngIf="isSuccess() else statusRenderer" class="list-group selection-box">
             <a *ngFor="let template of templates" [routerLink]="['/template', template.id]" class="list-group-item mb-1 list-group-item-action d-flex justify-content-between align-items-center">
               {{ template.name }}
               <span class="badge badge-info">{{ template.language }}</span>
             </a>
           </ul>
         </div>
-        <ng-template #loadingStatus>
-          <div class="status-text">{{showStatus()}}</div>
+        <ng-template #statusRenderer>
+          <div class="status-text">{{ getStatusText() }}</div>
         </ng-template>
       </div>
     </div>

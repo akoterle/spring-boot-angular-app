@@ -4,18 +4,26 @@ import { ITemplate, TemplateService } from '../api/template.service';
 import { IInitiative } from '../../initiatives/service/initiative.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/throw';
 
 interface IState {
   id: number;
+  templates: Observable<ITemplate[]>;
   error: string;
 }
 
 const states = {
-  WAITING_USER_SELECTION: 0,
-  LOADING: 3,
-  INITIATIVE_SELECTED: 1,
-  LOADING_ERROR: 2
+  INITED: 0,
+  LOADING: 1,
+  SUCCESS: 2,
+  ERROR: 3
+};
+
+const initialState: IState = {
+  id: states.INITED,
+  templates: Observable.empty(),
+  error: ''
 };
 
 @Component({
@@ -25,28 +33,23 @@ const states = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TemplateListComponent implements OnInit {
-  templates: Observable<ITemplate[]>;
-  state: IState = { id: states.WAITING_USER_SELECTION, error: '' };
-  loadingStatusText: string;
+  state: IState = { ...initialState };
 
-  @ViewChild('loadingStatus') loadingStatus: ElementRef;
+  @ViewChild('statusRenderer') statusRenderer: ElementRef;
 
-  constructor(private api: TemplateService) {
-    this.state = { id: states.WAITING_USER_SELECTION, error: null };
-  }
+  constructor(private api: TemplateService) {}
 
-  showList = (): boolean => this.state.id > states.WAITING_USER_SELECTION;
-  loadSuccess = (): boolean => {
-    return !(this.state.id === states.LOADING_ERROR);
+  isReadyToShowList = (): boolean => this.state.id !== states.INITED;
+  isSuccess = (): boolean => {
+    return this.state.id !== states.ERROR;
   };
-  showStatus = () => {
-    return this.state.id === states.LOADING ? 'Caricamento template...' : 'Errore caricamento: ' + this.state.error;
+  getStatusText = () => {
+    return this.state.id === states.LOADING ? 'Caricamento template...' : 'Si è verificato un errore: ' + this.state.error;
   };
   onInitiativeChange = (initiative: IInitiative) => {
     this.state.id = states.LOADING;
-    // this.loadingStatusText = 'Caricamento template...';
-    this.templates = this.api.all().catch(err => {
-      this.state.id = states.LOADING_ERROR;
+    this.state.templates = this.api.all().catch(err => {
+      this.state.id = states.ERROR;
       this.state.error = err.error;
       return Observable.of([]);
     });

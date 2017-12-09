@@ -1,5 +1,4 @@
 <select class="form-control" (change)="onChange($event)" [(ngModel)]="selectedInitiative">
   <option disabled hidden [value]="undefined">{{emptyOptionMessageText}}</option>
-  <option [value]="1">Prova</option>
   <option *ngFor="let initiative of initiatives | async" [ngValue]="initiative">{{initiative.title}}</option>
 </select>
