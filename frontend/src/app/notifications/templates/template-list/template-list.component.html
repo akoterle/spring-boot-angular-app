@@ -10,7 +10,7 @@
     <div class="row no-gutters list-box">
       <div *ngIf="showList()" class="col">
         <div *ngIf="(templates | async); let templates; else loadingStatus">
-          <ul class="list-group" *ngIf="loadingError === false; else loadingStatus">
+          <ul *ngIf="loadSuccess() else loadingStatus" class="list-group selection-box">
             <a *ngFor="let template of templates" [routerLink]="['/template', template.id]" class="list-group-item mb-1 list-group-item-action d-flex justify-content-between align-items-center">
               {{ template.name }}
               <span class="badge badge-info">{{ template.language }}</span>
@@ -18,7 +18,7 @@
           </ul>
         </div>
         <ng-template #loadingStatus>
-          <div class="status-text">{{loadingStatusText}}</div>
+          <div class="status-text">{{showStatus()}}</div>
         </ng-template>
       </div>
     </div>
