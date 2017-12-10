@@ -34,8 +34,7 @@ const initialState: IState = {
 })
 export class TemplateListComponent implements OnInit {
   state: IState = { ...initialState };
-
-  @ViewChild('statusRenderer') statusRenderer: ElementRef;
+  languages = Observable.of(['it', 'en', 'fr']);
 
   constructor(private api: TemplateService) {}
 
@@ -44,7 +43,14 @@ export class TemplateListComponent implements OnInit {
     return this.state.id !== states.ERROR;
   };
   getStatusText = () => {
-    return this.state.id === states.LOADING ? 'Caricamento template...' : 'Si è verificato un errore: ' + this.state.error;
+    switch (this.state.id) {
+      case states.INITED:
+        return 'Nessuna iniziativa selezionata';
+      case states.LOADING:
+        return 'Caricamento dei template...';
+      case states.ERROR:
+        return 'Si è verificato un errore: ' + this.state.error;
+    }
   };
   onInitiativeChange = (initiative: IInitiative) => {
     this.state.id = states.LOADING;

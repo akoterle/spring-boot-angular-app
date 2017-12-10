@@ -28,6 +28,7 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "./libs/iconic/font/css/open-iconic-bootstrap.min.css",
         "../node_modules/ng2-tree/styles.css",
         "styles.css"
       ],
