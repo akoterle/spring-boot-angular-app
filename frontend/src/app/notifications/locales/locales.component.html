@@ -1,0 +1,4 @@
+<select class="form-control" (change)="onChange($event)" [(ngModel)]="selectedLocale">
+  <option disabled hidden [value]="undefined">Seleziona la lingua</option>
+  <option *ngFor="let locale of locales | async" [ngValue]="locale">{{locale.title}}</option>
+</select>

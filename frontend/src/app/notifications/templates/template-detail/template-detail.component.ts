@@ -5,6 +5,8 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import { ITemplate, TemplateService } from '../api/template.service';
 import { AppConfig } from '../../../config/service';
+import { IInitiative } from '../../initiatives/service/initiative.service';
+import { ILocale } from '../../locales/locales.service';
 
 const CKEDITOR = window['CKEDITOR'];
 
@@ -21,6 +23,8 @@ export class TemplateDetailComponent implements OnInit {
   templatesUrl: string;
   editorInstance: any;
   template: ITemplate;
+  initiative: IInitiative;
+  locale: ILocale;
 
   @ViewChild('uploadImageForm') uploadImageForm: ElementRef;
   @ViewChild('browseImageFile') browseImageFile: ElementRef;
@@ -28,7 +32,6 @@ export class TemplateDetailComponent implements OnInit {
   @ViewChild('browseAttachment') browseAttachment: ElementRef;
 
   constructor(private api: TemplateService, private route: ActivatedRoute, private router: Router) {
-    this.testRecipient = 'test@email.me';
     const newTemplate: ITemplate = {
       id: undefined,
       initiativeId: 1,
@@ -51,6 +54,15 @@ export class TemplateDetailComponent implements OnInit {
     });
 
   }
+
+  onInitiativeChange = (initiative: IInitiative) => {
+    this.initiative = initiative;
+  };
+
+  onLocaleChange = (locale: ILocale) => {
+    this.locale = locale;
+  };
+
 
   onImageButtonClick(event) {
     this.browseImageFile.nativeElement.click();

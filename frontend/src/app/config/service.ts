@@ -13,4 +13,5 @@ export class AppConfig {
   templatesUrl = () => this.environment.api.notifications.templates;
   uploadEndpoint = () => this.environment.api.notifications.uploadFiles;
   initiativesUrl = () => this.environment.api.notifications.initiatives;
+  localesUrl = () => this.environment.api.notifications.locales;
 }

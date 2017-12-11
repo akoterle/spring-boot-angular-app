@@ -13,6 +13,7 @@ export const environment = {
       templates: '/notification/v1/templates',
       uploadFiles: '/notification/v1/templates',
       initiatives: '/notification/v1/initiatives',
+      locales: '/notification/v1/locales',
     }
   }
 };

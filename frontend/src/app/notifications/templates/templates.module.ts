@@ -9,11 +9,12 @@ import { TemplateListComponent } from './template-list/template-list.component';
 import { TemplateDetailComponent } from './template-detail/template-detail.component';
 import { TemplateRoutingModule } from './templates.routing.module';
 import { InitiativesModule } from '../initiatives/initiatives.module';
+import { LocalesModule } from '../locales/locales.module';
 
 @NgModule({
   declarations: [TemplatesComponent, TemplateDetailComponent, TemplateListComponent],
   exports: [TemplatesComponent, TemplateDetailComponent],
-  imports: [AppConfigModule, InitiativesModule, FormsModule, CKEditorModule, TemplateRoutingModule, CommonModule],
+  imports: [AppConfigModule, InitiativesModule, LocalesModule, FormsModule, CKEditorModule, TemplateRoutingModule, CommonModule],
   providers: [TemplateService]
 })
 export class TemplatesModule {}

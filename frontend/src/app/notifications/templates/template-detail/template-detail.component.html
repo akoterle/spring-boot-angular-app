@@ -1,47 +1,70 @@
 <div class="container">
-  <div class="row">
-    <div class="col-4" style="padding: 10px;">
-      <label for="name">Nome template</label>
-      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="template.name" />
-      <label for="lang">Lingua template</label>
-      <input type="text" class="form-control" id="lang" name="lang" [(ngModel)]="template.lang" />
-    </div>
-    <div class="col-8" style="padding: 10px">
-      <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event)" (ready)="onReady($event)" (focus)="onFocus($event)"
-        (blur)="onBlur($event)" debounce="500">
-        <ckbutton [name]="'insertImageButton'" [command]="'insertImage'" (click)="onImageButtonClick($event)" [icon]="'/ckeditor/icons/picture_add.png?t=H8DC'"
-          [label]="'Inserisci immagine'" [toolbar]="'forms,1'">
-        </ckbutton>
-        <ckbutton [name]="'insertAttachmentButton'" [command]="'insertAttachment'" (click)="onAttachmentButtonClick($event)" [icon]="'/ckeditor/icons/attachment.png?t=H8DC'"
-          [label]="'Aggiungi allegato'" [toolbar]="'forms,2'">
-        </ckbutton>
-      </ckeditor>
-      <form #uploadImageForm method='POST' enctype='multipart/form-data'>
-        <label #browseImageFile for="imageFileInput" style="display: none">
-        </label>
-        <input type="file" name="image" id="imageFileInput" style="display: none" (change)="onImageSelected($event)" />
-      </form>
-      <form #uploadAttachmentForm method='POST' enctype='multipart/form-data'>
-        <label #browseAttachment for="attachmentFileInput" style="display: none">
-        </label>
-        <input type="file" name="attachment" id="attachmentFileInput" style="display: none" (change)="onAttachmentSelected($event)"
-        />
-      </form>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row justify-content-between">
-      <div class="col-8 ">
-        <div class="row justify-content-start">
-          <button [disabled]="!isTemplateValid()" type="button" class="btn btn-primary" (click)=onTest($event)>Prova Template</button>
-          <input type="text" style="width: 80%;" class="form-control" id="test-recipient" name="recipient" [(ngModel)]="testRecipient"
-          />
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-6">
+            <app-initiatives (onInitiativeChange)="onInitiativeChange($event)"></app-initiatives>
+          </div>
+          <div class="col-3">
+            <app-locales (onLocaleChange)="onLocaleChange($event)"></app-locales>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-primary float-right" routerLink="/notification/templates" routerLinkActive="active">
+              <span class="oi oi-circle-x" aria-hidden="true"></span> Annulla
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="col-4">
-        <div style="text-align: right">
-          <button type="button" class="btn btn-primary" (click)=onSave($event)>Salva Template</button>
-          <button type="button" class="btn btn-primary" (click)=onCancel($event)>Annulla</button>
+        <br>
+        <div class="row">
+          <div class="col-4">
+            <label class="sr-only" for="templateNameInput">Nome template</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="templateNameInput" placeholder="Nome del template">
+          </div>
+          <div class="col-8">
+            <label class="sr-only" for="templateDescrInput">Descrizione template</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="templateDescrInput" placeholder="Descrizione del template">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+            <ckeditor [(ngModel)]="ckeditorContent" [readonly]="false" (change)="onChange($event)" (ready)="onReady($event)" (focus)="onFocus($event)"
+              (blur)="onBlur($event)" debounce="500">
+              <ckbutton [name]="'insertImageButton'" [command]="'insertImage'" (click)="onImageButtonClick($event)" [icon]="'/ckeditor/icons/picture_add.png?t=H8DC'"
+                [label]="'Inserisci immagine'" [toolbar]="'forms,1'">
+              </ckbutton>
+              <ckbutton [name]="'insertAttachmentButton'" [command]="'insertAttachment'" (click)="onAttachmentButtonClick($event)" [icon]="'/ckeditor/icons/attachment.png?t=H8DC'"
+                [label]="'Aggiungi allegato'" [toolbar]="'forms,2'">
+              </ckbutton>
+            </ckeditor>
+            <form #uploadImageForm method='POST' enctype='multipart/form-data'>
+              <label #browseImageFile for="imageFileInput" style="display: none">
+              </label>
+              <input type="file" name="image" id="imageFileInput" style="display: none" (change)="onImageSelected($event)" />
+            </form>
+            <form #uploadAttachmentForm method='POST' enctype='multipart/form-data'>
+              <label #browseAttachment for="attachmentFileInput" style="display: none">
+              </label>
+              <input type="file" name="attachment" id="attachmentFileInput" style="display: none" (change)="onAttachmentSelected($event)"
+              />
+            </form>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon1">@</span>
+              <input type="text" class="form-control" placeholder="Indirizzo email di prova" aria-label="EmailAddress" aria-describedby="sizing-addon1" [(ngModel)]="testRecipient">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" [disabled]="!isTemplateValid()" (click)=onTest($event)>Invia</button>
+              </span>
+            </div>
+          </div>
+          <div class="col-6">
+              <button type="button" class="btn btn-primary float-right" (click)=onSave($event)>Salva e chiudi</button>
+            </div>
         </div>
       </div>
     </div>
