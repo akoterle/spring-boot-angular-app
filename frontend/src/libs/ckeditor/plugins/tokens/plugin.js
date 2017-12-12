@@ -10,9 +10,10 @@
       // Gets the list of tags from the settings.
       var tags = []; //new Array();
       //this.add('value', 'drop_text', 'drop_label');
-      tags[0] = ['[[NomeUtente]]', 'Nome utente', 'Nome utente'];
-      // tags[1] = ['[contact_email]', 'email', 'email'];
-      // tags[2] = ['[contact_user_name]', 'User name', 'User name'];
+      tags[0] = ['firstName', 'firstName', 'Nome'];
+      tags[1] = ['lastName', 'lastName', 'Cognome'];
+      tags[2] = ['email', 'email', 'eMail'];
+      tags[3] = ['username', 'username', 'Nome utente'];
 
       // Create style objects for all defined styles.
 
@@ -29,7 +30,7 @@
         },
 
         init: function() {
-          
+
           this.startGroup('Segnaposto');
           //this.add('value', 'drop_text', 'drop_label');
           for (var this_tag in tags) {
@@ -45,7 +46,7 @@
         onClick: function(value) {
           editor.focus();
           editor.fire('saveSnapshot');
-          editor.insertHtml(value);
+          editor.insertHtml('['+value+']');
           editor.fire('saveSnapshot');
         }
       }); // .setAttribute('aria-label', 'Tokens');;
